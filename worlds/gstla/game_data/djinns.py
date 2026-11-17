@@ -70,6 +70,10 @@ class Djinn(BaseItem):
         # To decode:
         # (number >> 5) & 0b11  # (or 0x3) for the element
         # number & 0b11111  # (or 0x1F) for the index
+        # TEMP EXAMPLES
+        # Djinn(element=<ElementType.Earth: 0>, index=0, name='Flint') == 0xB00
+        # Djinn(element=<ElementType.Water: 1>, index=12, name='Steam') == 0xB2C
+        # Djinn(element=<ElementType.Air: 3>, index=6, name='Luff') == 0xB66
         return 0xB00 | (self.element << 5) | self.index
 
     @classmethod
