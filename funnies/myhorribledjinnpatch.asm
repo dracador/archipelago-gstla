@@ -1,7 +1,6 @@
 @offset = 09006300
 @  string[0xE38] <- "An item appears before you..."
 
-
 _dataScriptx19:
 push {r0, lr}
 bl funcCheckBuffer
@@ -14,7 +13,7 @@ pop {pc}
 .hword 0x0
 
 _thunkDataScriptx19:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x08027065
 
@@ -31,10 +30,9 @@ _abortScript:
 pop {r0, pc}
 
 _thunkDataScriptx1F:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x08027E21
-
 
 funcCheckBuffer:
 push {r5, lr}
@@ -138,52 +136,52 @@ end:
 pop {r5, pc}
 
 thunkStartCutscene:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080D22A9
 
 thunkEndCutscene:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080D2351
 
 thunkPlaySound:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x081C0CB1
 
 thunkShowStatusBox:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x08038041
 
 thunkForceAddItem:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080D260D
 
 thunkGetPartyLeader:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080CB8E9
 
 thunkSetNpcStateIdle:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080235F9
 
 thunkSetNpcStateControlled:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x08023525
 
 thunkSetTextVariable:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x0803CCD1
 
 thunkAddCoins:
-ldr r4, #0x0
+ldr r4, [pc, #0x0]
 bx r4
 .word 0x080AFEB1
 
