@@ -102,9 +102,18 @@ ands r0, r2
 movs r1, r5
 movs r2, #0x1F
 ands r1, r2
-
-
 bl thunkAddDjinn
+
+// 2E = Venus, 2F = Merc, 30 = Mars, 31 = Jup
+// order seems to be char, ele, index or ele, char, index
+movs r2, r1
+movs r1, r0
+movs r0, #0x4
+// Felix, and correct djinns?
+// nope, lol, Jupiter icon and text was "0 mercury"
+
+// do r0 and r1 stay?
+bl thunkShowDjinnStatusBox
 
 b skip
 
@@ -216,6 +225,12 @@ thunkShowStatusBox:
 ldr r4, [pc, #0x0]
 bx r4
 .word 0x08038041
+
+thunkShowDjinnStatusBox:
+ldr r4, [pc, #0x0]
+bx r4
+.word 0x08044A59
+
 
 thunkForceAddItem:
 ldr r4, [pc, #0x0]
