@@ -94,12 +94,14 @@ bl thunkAddDjinn
 // element
 movs r0, r5
 lsrs r0, r0, #0x5
-ands r0, #0x3
+movs r2, #0x3
+ands r0, r2
 // r0 should be the proper element now
 
 // djinndex
 movs r1, r5
-ands r1, #0x1F
+movs r2, #0x1F
+ands r1, r2
 
 
 bl thunkAddDjinn
