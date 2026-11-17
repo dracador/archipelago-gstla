@@ -471,7 +471,11 @@ class GSTLAClient(BizHawkClient):
         item = ctx.items_received[index_to_give]
 
         logger.debug('Writing Item %d to Slot', item.item)
-        await write(ctx.bizhawk_ctx, [AP_ITEM_SLOT.to_write(item.item)])
+        if item.item in self.game_data.djinn:
+            djinn = self.game_data.djinn[item.item]
+            await write(ctx.bizhawk_ctx, [AP_ITEM_SLOT.to_write(djinn.rando_flag_forreal)])
+        else:
+            await write(ctx.bizhawk_ctx, [AP_ITEM_SLOT.to_write(item.item)])
 
     def _should_give_to_player(self, ctx: BizHawkClientContext, item: NetworkItem) -> bool:
         logger.debug('item: %s flags: %s location: %s coop: %s', item.item, item.flags, item.location, self.coop)
@@ -484,8 +488,9 @@ class GSTLAClient(BizHawkClient):
             #
             # We could also remove djinns from the item pool entirely, maybe.
             # I only noticed this when trying a "!getitem Lash", which tried to map to "Flash"
-            logger.warning('Cannot give %s: djinn cannot be sent as items', self.game_data.djinn[item.item].name)
-            return False
+            # logger.warning('Cannot give %s: djinn cannot be sent as items', self.game_data.djinn[item.item].name)
+            # return False
+            return True  # whee
         if ctx.slot != item.player:
             return True
         if item.location < 0:

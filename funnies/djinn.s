@@ -93,7 +93,7 @@ ands r0, r2
 movs r1, r5
 movs r2, #0x1F
 ands r1, r2
-bl thunkAddDjinn
+bl thunkAddDjinn // TODO: skip if we already have one (maybe check for -1 in r0 after?)
 
 // r0 is the returned value of add_djinn() now, which can be either -1 or 0-7 (either already obtained or char index)
 
