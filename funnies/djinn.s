@@ -43,8 +43,10 @@ push {r5, lr}
 ldr r1, ptrItemBuffer
 ldrh r0, [r1, #0x0]
 cmp r0, #0x0
-beq end
+bne tempSkip
+b end // workaround, branch too long otherwise
 
+tempSkip:
 movs r5, r0
 bl thunkStartCutscene
 bl thunkGetPartyLeader
@@ -70,17 +72,6 @@ lsls r0, #0x8
 adds r0, #0x30
 movs r1, #0x0
 bl thunkShowStatusBox
-
-// add echo? maybe probably hopefully?
-// movs r0, #0x0
-// movs r1, #0x0
-
-// Vine
-movs r0, #0x0
-movs r1, #0x3
-
-// seems like it's fine to call this multiple times?
-bl thunkAddDjinn
 
 // TODO: doesn't trigger any cutscene/textbox itself...
 // Djinn(element=<ElementType.Earth: 0>, index=0, name='Flint') == 0xB00
@@ -112,7 +103,19 @@ movs r0, #0x4
 // Felix, and correct djinns?
 // nope, lol, Jupiter icon and text was "0 mercury"
 
-// do r0 and r1 stay?
+// do r0 and r1 stay? doesnt seems like it
+
+// DUMP, doc says 02000F80 probably unused
+ldr r3, ptrDebugDump
+str r0, [r3, #0x0]
+str r1, [r3, #0x4]
+str r2, [r3, #0x8]
+
+// r0=00000004 r1=FFFFFFFF r2=00000000 -> 0xB00 (Felix and Isaac joined your party)
+// r0=00000004 r1=00000004 r2=02000040 -> 0xB01 (Felix can now summon Faiff to he synttt tag!) lmao
+// r0=00000004 r1=00000007 r2=02000040 -> 0xB02 (Jupiter icon and text was "0 mercury")
+
+
 bl thunkShowDjinnStatusBox
 
 b skip
@@ -280,3 +283,6 @@ ptrEncounter:
 
 ptrEncounterFlags:
 .word 0x0200048B
+
+ptrDebugDump:
+.word 0x02000F80
