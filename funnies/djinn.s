@@ -70,6 +70,7 @@ lsls r0, #0x8
 adds r0, #0x30
 movs r1, #0x0
 bl thunkShowStatusBox
+b skip
 
 // djinn end
 notDjinn:
