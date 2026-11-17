@@ -70,6 +70,19 @@ lsls r0, #0x8
 adds r0, #0x30
 movs r1, #0x0
 bl thunkShowStatusBox
+
+// add echo? maybe probably hopefully?
+// movs r0, #0x0
+// movs r1, #0x0
+
+// Vine
+movs r0, #0x0
+movs r1, #0x3
+
+// TODO: doesn't trigger any cutscene/textbox itself...
+
+bl thunkAddDjinn
+
 b skip
 
 // djinn end
@@ -213,9 +226,10 @@ bx r4
 
 // my plan:
 // 080B0AB8 = add_djinni(element,djinni) Checks flags. - Returns pc added to
-// TODO
-// thunkAddDjinn:
-// .word 0x080B0AB9  // 080B0AB8 + 1 bc of thunk
+thunkAddDjinn:
+ldr r4, [pc, #0x0]
+bx r4
+.word 0x080B0AB9  // 080B0AB8 + 1 bc of thunk
 
 ptrItemBuffer:
 .word 0x02000A96
