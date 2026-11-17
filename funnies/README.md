@@ -19,8 +19,3 @@ Other interesting threads:
 Battle functions: http://forum.goldensunhacking.net/index.php?topic=1632.0
 ROM Location Offsets: http://forum.goldensunhacking.net/index.php?topic=1424.0
 Basic Room Scripting Guide: http://forum.goldensunhacking.net/index.php?topic=2617
-
-
-The holy grail:
-https://docs.google.com/document/d/1nsDI-Bx6p65X25CPGdJOk8K-WVsYjYTBEN-i_bR8bdk/edit?tab=t.0
-My copy: https://docs.google.com/document/d/1_6RGWHibCIqVFshCvKfTRTFJ3K8rkhwjMo2m8oTvRpo/edit?tab=t.0
