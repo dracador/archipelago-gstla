@@ -56,11 +56,31 @@ adds r0, #0x38
 movs r1, #0x0
 bl thunkShowStatusBox
 
+// djinn start
+// check if djinn
+movs r1, #0xB
+movs r0, r5
+lsrs r0, r0, #0x8
+cmp r0, r1
+bne notDjinn
+
+// do djinn things
+movs r0, #0xE // just always starts with that?
+lsls r0, #0x8
+adds r0, #0x30
+movs r1, #0x0
+bl thunkShowStatusBox
+
+// djinn end
+notDjinn:
+// check if mimic
 movs r1, #0xA
 movs r0, r5
 lsrs r0, r0, #0x8
 cmp r0, r1
-bne notMimic
+bne notMimic // jumps to notMimic, which then jumps to notCoins
+
+// mimic start
 movs r0, r5
 movs r1, #0xFF
 ands r0, r1
@@ -84,6 +104,7 @@ strb r0, [r1, #0x0]
 bl thunkEndCutscene
 movs r0, #0x1
 b end
+// mimic end
 
 notMimic:
 movs r1, #0x80
@@ -138,7 +159,7 @@ movs r0, #0x1
 end:
 pop {r5, pc}
 
-.hword 0x0
+.balign 4
 thunkStartCutscene:
 ldr r4, [pc, #0x0]
 bx r4
@@ -188,6 +209,12 @@ thunkAddCoins:
 ldr r4, [pc, #0x0]
 bx r4
 .word 0x080AFEB1
+
+// my plan:
+// 080B0AB8 = add_djinni(element,djinni) Checks flags. - Returns pc added to
+// TODO
+// thunkAddDjinn:
+// .word 0x080B0AB9  // 080B0AB8 + 1 bc of thunk
 
 ptrItemBuffer:
 .word 0x02000A96
