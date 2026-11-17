@@ -95,11 +95,13 @@ movs r2, #0x1F
 ands r1, r2
 bl thunkAddDjinn
 
+// r0 is the returned value of add_djinn() now, which can be either -1 or 0-7 (either already obtained or char index)
+
 // 2E = Venus, 2F = Merc, 30 = Mars, 31 = Jup
 // order seems to be char, ele, index or ele, char, index
-movs r2, r1
-movs r1, r0
-movs r0, #0x4
+// movs r2, r1
+// movs r1, r0
+// movs r0, #0x4
 // Felix, and correct djinns?
 // nope, lol, Jupiter icon and text was "0 mercury"
 
@@ -115,9 +117,19 @@ str r2, [r3, #0x8]
 // r0=00000004 r1=00000004 r2=02000040 -> 0xB01 (Felix can now summon Faiff to he synttt tag!) lmao
 // r0=00000004 r1=00000007 r2=02000040 -> 0xB02 (Jupiter icon and text was "0 mercury")
 
+// gotta unpack again then :/ (but this time via r3, we need r2, also r0=r1, r1=r2, r0 has to be the return value)
+// element
+movs r1, r5
+lsrs r1, r1, #0x5
+movs r3, #0x3
+ands r1, r3
+
+// djinndex
+movs r2, r5
+movs r3, #0x1F
+ands r2, r3
 
 bl thunkShowDjinnStatusBox
-
 b skip
 
 // djinn end
